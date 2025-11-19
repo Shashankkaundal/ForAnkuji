@@ -15,7 +15,11 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/garden.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
-
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
 </head>
 
 <body>
@@ -113,7 +117,23 @@ if (!document.createElement('canvas').getContext) {
 	adjustCodePosition();
 	$("#code").typewriter();
 }
-
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.3; // Set volume to 30%
+    
+    // Play music when page loads
+    bgMusic.play().catch(function(error) {
+        console.log('Auto-play prevented. User interaction required.');
+    });
+    
+    // Stop music after 30 seconds
+    setTimeout(function() {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+    }, 30000); // 30 seconds
+});
+</script>				
 </body>
 </html>
