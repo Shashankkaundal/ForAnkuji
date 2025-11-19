@@ -71,25 +71,35 @@ function startHeartAnimation() {
 }
 
 (function($) {
-	$.fn.typewriter = function() {
-		this.each(function() {
-			var $ele = $(this), str = $ele.html(), progress = 0;
-			$ele.html('');
-			var timer = setInterval(function() {
-				var current = str.substr(progress, 1);
-				if (current == '<') {
-					progress = str.indexOf('>', progress) + 1;
-				} else {
-					progress++;
-				}
-				$ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));
-				if (progress >= str.length) {
-					clearInterval(timer);
-				}
-			}, 75);
-		});
-		return this;
-	};
+    $.fn.typewriter = function(soundUrl) {
+        this.each(function() {
+            var $ele = $(this), str = $ele.html(), progress = 0;
+            $ele.html('');
+            
+            // Preload typewriter sound
+            var typeSound = new Audio(soundUrl || 'https://assets.mixkit.co/active_storage/sfx/281/281-preview.mp3');
+            typeSound.volume = 0.3;
+            
+            var timer = setInterval(function() {
+                var current = str.substr(progress, 1);
+                if (current == '<') {
+                    progress = str.indexOf('>', progress) + 1;
+                } else {
+                    progress++;
+                    // Play sound only for visible characters (not HTML tags)
+                    if (current !== '>' && current.trim() !== '') {
+                        typeSound.currentTime = 0;
+                        typeSound.play().catch(e => console.log('Audio play failed:', e));
+                    }
+                }
+                $ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));
+                if (progress >= str.length) {
+                    clearInterval(timer);
+                }
+            }, 75);
+        });
+        return this;
+    };
 })(jQuery);
 
 function timeElapse(date){
