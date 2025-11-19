@@ -1,4 +1,4 @@
-﻿
+
 var $window = $(window), gardenCtx, gardenCanvas, $garden, garden;
 var clientWidth = $(window).width();
 var clientHeight = $(window).height();
@@ -70,7 +70,7 @@ function startHeartAnimation() {
 	}, interval);
 }
 
-function($) {
+(function($) {
 	$.fn.typewriter = function() {
 		this.each(function() {
 			var $ele = $(this), str = $ele.html(), progress = 0;
@@ -91,6 +91,7 @@ function($) {
 		return this;
 	};
 })(jQuery);
+
 function timeElapse(date){
 	var current = Date();
 	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
