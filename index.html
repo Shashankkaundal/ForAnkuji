@@ -70,7 +70,17 @@
 		</div>
 	</div>
 </div>
-
+<script type="text/javascript">
+    // Initialize heart animations when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the heart trail effect
+        window.HeartAnimations.initAllHeartAnimations();
+        
+        // Or initialize them separately:
+        // window.HeartAnimations.initHeartTrail(); // Just the mouse trail
+        // window.HeartAnimations.initFloatingHearts(); // Just floating hearts
+    });
+</script>
 <script type="text/javascript">
 var offsetX = $("#loveHeart").width() / 2;
 var offsetY = $("#loveHeart").height() / 2 - 55;
@@ -103,10 +113,7 @@ if (!document.createElement('canvas').getContext) {
 	adjustCodePosition();
 	$("#code").typewriter();
 }
-document.addEventListener('DOMContentLoaded', function() {
-        // Initialize the heart trail effect
-        window.HeartAnimations.initAllHeartAnimations();
-}
+
 </script>
 </body>
 </html>
